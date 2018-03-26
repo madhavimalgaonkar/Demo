@@ -1,0 +1,6 @@
+name: register
+description: 'Enable multistep registration from for the platform'
+type: module
+core: 8.x
+package: Marriage Bureau
+version: 8.x-1.0

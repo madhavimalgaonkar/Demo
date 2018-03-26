@@ -1,0 +1,65 @@
+<?php
+
+use \Drupal\Core\Form\FormStateInterface;
+use Drupal\Core\Form\FormState;
+
+function register_form_user_register_form_alter (&$form, $form_state) {
+   $form_state->set('page_num', 1);
+   $v = $form_state->get('page_num');
+  if ($v == 1) {
+    $form['interests'] = [
+      '#type' => 'checkboxes',
+      '#title' => t('Nice to meet you! So, what are you interests?'),
+      '#options' => [1 => 'interest 1', 2 => 'interest 2', 3 => 'interest 3'],
+      '#required' => FALSE,
+    ];
+    $form['actions']['next'] = [
+         '#type' => 'submit',
+         '#value' => 'Next',
+         '#submit' => ['register_form_one_next_submit'],
+       ];
+    $form['actions']['submit']['#access'] = FALSE;
+    $v = $v+1;
+  }
+     else if ($v == 2) {
+       exit;
+       $form['dob'] = [
+         '#type' => 'date',
+         '#title' => t('DOB'),
+         '#required' => FALSE,
+       ];
+       $form['actions']['previous'] = [
+            '#type' => 'submit',
+            '#value' => 'Previous',
+            '#submit' => ['register_form_user_register_form_alter'],
+          ];
+       $form['actions']['next'] = [
+            '#type' => 'submit',
+            '#value' => 'Next',
+            '#submit' => ['register_form_two_next_submit'],
+          ];
+       $form['actions']['submit']['#access'] = FALSE;
+        return $form;
+     }
+
+     return $form;
+  }
+
+  function register_form_one_next_submit (&$form, $form_state) {
+    $valuesOne = $form_state->getValues();
+  }
+  function register_form_two_next_submit (&$form, $form_state) {
+    $valuesTwo = $form_state->getValues();
+  }
+  //
+  // else{
+  //   dsm($pageValue);
+  //   exit;
+  //       $form['username'] = array(
+  //      '#type' => 'textfield',
+  //      '#title' => t("Username"),
+  //      '#required' => TRUE,
+  //    );
+  //    $form['actions']['submit']['#access'] = TRUE;
+  // }
+  // return $form;
