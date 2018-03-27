@@ -1,0 +1,7 @@
+mb.register:
+  path: '/register'
+  defaults:
+    _title: 'Multistep Form'
+    _controller: '\Drupal\mb_register\Controller\MbRegister::register'
+  requirements:
+    _permission: 'access content'

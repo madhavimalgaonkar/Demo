@@ -1,0 +1,19 @@
+<?php
+
+use Drupal\Core\Form\FormBase;
+use Drupal\Core\Form\FormStateInterface;
+use Drupal\field\Entity\FieldConfig;
+use Drupal\field\Entity\FieldStorageConfig;
+use Drupal\field\Plugin\Core\Entity\FieldInstance;
+use Drupal\Core\Entity\EntityInterface;
+
+function mb_register_form_user_register_form_alter($form, $form_state) {
+  dsm($form);
+}
+
+function mb_register_get_options_value($field_name) {
+  $values = 'user.user.' . $field_name;
+  $field = FieldConfig::load($values)->getFieldStorageDefinition();
+  $options = $field->getSetting('allowed_values');
+  return $options;
+}
